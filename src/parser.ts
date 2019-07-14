@@ -28,7 +28,7 @@ export function parseRequest(req: IncomingMessage) {
     const parsedRequest: ParsedRequest = {
         fileType: extension === 'jpeg' ? extension : 'png',
         text: decodeURIComponent(text),
-        theme: theme === 'dark' ? 'dark' : 'light',
+        theme: theme === 'dark' ? 'dark' : theme === 'darcy' ? 'darcy' : theme === 'ip' ? 'ip' : 'light' ,
         md: md === '1' || md === 'true',
         fontSize: fontSize || '96px',
         images: getArray(images),
@@ -44,10 +44,12 @@ function getArray(stringOrArray: string[] | string): string[] {
 }
 
 function getDefaultImages(images: string[], theme: Theme): string[] {
-    if (images.length > 0 && images[0] && images[0].startsWith('https://assets.zeit.co/image/upload/front/assets/design/')) {
+    if (images.length > 0 && images[0] && images[0].startsWith('https://')) {
         return images;
     }
-    return theme === 'light'
-    ? ['https://assets.zeit.co/image/upload/front/assets/design/now-black.svg']
-    : ['https://assets.zeit.co/image/upload/front/assets/design/now-white.svg'];
+    return theme === 'light' || theme === 'darcy'
+    ? ['https://cdn.darcylf.me/darcy_badge/circle-on-white.svg']
+    : theme === 'ip' 
+    ? ['https://cdn.darcylf.me/ip.svg']
+    : ['https://cdn.darcylf.me/darcy_badge/circle-on-white.svg']
 }

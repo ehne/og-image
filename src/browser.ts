@@ -122,6 +122,8 @@ const Toast = ({ show, message }: ToastProps) => {
 const themeOptions: DropdownOption[] = [
     { text: 'Light', value: 'light' },
     { text: 'Dark', value: 'dark' },
+    { text: 'darcy lf', value: 'darcy'},
+    { text: 'integer.party', value: 'ip'},
 ];
 
 const fileTypeOptions: DropdownOption[] = [
@@ -141,17 +143,15 @@ const markdownOptions: DropdownOption[] = [
 ];
 
 const imageLightOptions: DropdownOption[] = [
-    { text: 'Now', value: 'https://assets.zeit.co/image/upload/front/assets/design/now-black.svg' },
-    { text: 'ZEIT', value: 'https://assets.zeit.co/image/upload/front/assets/design/zeit-black-triangle.svg' },
-    { text: 'Next.js', value: 'https://assets.zeit.co/image/upload/front/assets/design/nextjs-black-logo.svg' },
-    { text: 'Hyper', value: 'https://assets.zeit.co/image/upload/front/assets/design/hyper-color-logo.svg' },
+    { text: 'darcy lf', value: 'https://cdn.darcylf.me/darcy_badge/circle-on-white.svg' },
+    { text: 'integer.party', value: 'https://cdn.darcylf.me/ip.svg' },
+    { text: 'Collective Fullstack', value: 'https://cdn.darcylf.me/cf.svg' },
 ];
 
 const imageDarkOptions: DropdownOption[] = [
-    { text: 'Now', value: 'https://assets.zeit.co/image/upload/front/assets/design/now-white.svg' },
-    { text: 'ZEIT', value: 'https://assets.zeit.co/image/upload/front/assets/design/zeit-white-triangle.svg' },
-    { text: 'Next.js', value: 'https://assets.zeit.co/image/upload/front/assets/design/nextjs-white-logo.svg' },
-    { text: 'Hyper', value: 'https://assets.zeit.co/image/upload/front/assets/design/hyper-bw-logo.svg' },
+    { text: 'darcy lf', value: 'https://cdn.darcylf.me/darcy_badge/circle-on-white.svg' },
+    { text: 'integer.party', value: 'https://rawcdn.githack.com/ehne/numberfacts/bd00eb3007bf590a1f9a905102d2cb6a68deeb6b/numberfacts/main/static/main/img/logo_glyph.svg'},
+    { text: 'Collective Fullstack', value: 'https://cdn.darcylf.me/cf.svg' },
 ];
 
 const widthOptions = [
@@ -216,7 +216,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
         overrideUrl = null,
     } = state;
     const mdValue = md ? '1' : '0';
-    const imageOptions = theme === 'light' ? imageLightOptions : imageDarkOptions;
+    const imageOptions = theme === 'light' || theme === 'ip' || theme === 'darcy' ? imageLightOptions : imageDarkOptions;
     const url = new URL(window.location.origin);
     url.pathname = `${encodeURIComponent(text)}.${fileType}`;
     url.searchParams.append('theme', theme);
@@ -243,7 +243,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
                         options: themeOptions,
                         value: theme,
                         onchange: (val: Theme) => {
-                            const options = val === 'light' ? imageLightOptions : imageDarkOptions
+                            const options = val === 'light' || val === 'ip' || val === 'darcy' ? imageLightOptions : imageDarkOptions
                             let clone = [...images];
                             clone[0] = options[selectedImageIndex].value;
                             setLoadingState({ theme: val, images: clone });

@@ -11,15 +11,42 @@ const bold = readFileSync(`${__dirname}/../.fonts/Inter-Bold.woff2`).toString('b
 const mono = readFileSync(`${__dirname}/../.fonts/Vera-Mono.woff2`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
-    let background = 'white';
-    let foreground = 'black';
-    let radial = 'lightgray';
-
+    let background = '';
+        let foreground = '';
+        let radial = '';
+        let plus = '';
+        let codec = '';
+    if (theme === 'light') {
+        background = 'white';
+        foreground = 'black';
+        radial = 'lightgray';
+        plus = '#BBB';
+        codec = '#f05'
+    }
+    
     if (theme === 'dark') {
         background = 'black';
         foreground = 'white';
         radial = 'dimgray';
+        plus = '#BBB';
+        codec = '#f05'
     }
+    if (theme === 'darcy') {
+        background = '#fff';
+        foreground = '#000';
+        radial = '#fa0';
+        plus = '#fa0';
+        codec = '#f05'
+
+    }
+    if (theme === 'ip') {
+        background = '#fff';
+        foreground = '#d38';
+        radial = '#FBAEBB';
+        plus = '#d38';
+        codec = '#1683F7'
+    }
+    
     return `
     @font-face {
         font-family: 'Inter';
@@ -43,6 +70,7 @@ function getCss(theme: string, fontSize: string) {
       }
 
     body {
+        
         background: ${background};
         background-image: radial-gradient(${radial} 5%, transparent 0);
         background-size: 60px 60px;
@@ -54,14 +82,14 @@ function getCss(theme: string, fontSize: string) {
     }
 
     code {
-        color: #D400FF;
         font-family: 'Vera';
+        color: ${codec};
         white-space: pre-wrap;
         letter-spacing: -5px;
     }
 
     code:before, code:after {
-        content: '\`';
+        content: "'";
     }
 
     .logo-wrapper {
@@ -77,7 +105,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .plus {
-        color: #BBB;
+        color: ${plus};
         font-family: Times New Roman, Verdana;
         font-size: 100px;
     }

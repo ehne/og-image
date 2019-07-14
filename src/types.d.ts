@@ -1,5 +1,5 @@
 type FileType = 'png' | 'jpeg';
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark' | 'darcy' | 'ip';
 
 interface ParsedRequest {
     fileType: FileType;
