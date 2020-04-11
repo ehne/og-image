@@ -1,6 +1,7 @@
 {
     "version": 2,
     "name": "og-image",
+    "alias":"og.darcylf.me",
     "builds": [
         { "src": "*.js", "use": "@now/node" },
         {"src":"fonts/*.*", "use":"@now/static"},
