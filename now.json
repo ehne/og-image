@@ -1,19 +1,10 @@
 {
-    "name": "og-image",	 
- 
     "version": 2,
-
-    "alias": "og.darcylf.me",
-
+    "name": "og-image",
     "builds": [
-        { "src": "public/*", "use": "@now/static" },
-        { "src": "package.json", "use": "@now/static-build" },
-        { "src": "src/card.ts", "use": "@now/node", "config": { "maxLambdaSize": "36mb" } }
-    ],
-    "routes": [
-        { "src": "/", "dest": "/public/index.html" },
-        { "src": "/(favicon.ico|style.css|robots.txt)", "dest": "/public/$1" },
-        { "src": "/dist/browser.js", "dest": "/browser.js" },
-        { "src": "/(.+)", "dest": "/src/card.ts" }
+        { "src": "*.js", "use": "@now/node" },
+        {"src":"fonts/*.*", "use":"@now/static"},
+        {"src":"on-dark-hover.svg","use":"@now/static"},
+        {"src":"*.html","use":"@now/static"}
     ]
 }

@@ -1,24 +1,29 @@
 {
   "name": "og-image",
   "version": "1.0.0",
-  "description": "Generate an open graph image for twitter/facebook/etc",
-  "main": "dist/card.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "now dev",
-    "build": "tsc",
-    "now-build": "tsc",
-    "watch": "tsc --watch"
+    "start": "micro",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehne/og-image.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ehne/og-image/issues"
+  },
+  "homepage": "https://github.com/ehne/og-image#readme",
   "dependencies": {
-    "chrome-aws-lambda": "1.11.1",
-    "marked": "0.6.1",
-    "puppeteer-core": "1.11.0",
-    "twemoji": "11.3.0"
-  },
-  "devDependencies": {
-    "@types/marked": "0.6.1",
-    "@types/puppeteer-core": "1.9.0",
-    "typescript": "3.3.3333"
+    "jimp": "^0.10.1",
+    "micro": "^9.3.4",
+    "micro-query": "^0.3.0",
+    "sharp": "^0.25.2",
+    "text-to-svg": "^3.1.5",
+    "urlencoded-body-parser": "latest",
+    "vectorize-text": "^3.2.1"
   }
 }

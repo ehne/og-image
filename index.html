@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>og-image as a service</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+	<!--<link rel="stylesheet" href="https://magicfalk.com/awsm.css">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tablesaw/3.1.2/tablesaw.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tablesaw/3.1.2/tablesaw.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@codolog/form@1.0.0/dist/form.css">
+</head>
+<body>
+    <div class="p-8">
+        
+            <input type="text" name="textToShow" id="textToShow" class="form">
+            <button id="submit" class="form">go</button>
+        
+        <div id="url">
+            <a href=""></a>
+            <img src="" alt="">
+        </div>
+    </div>
+    
+    
+
+    <script>
+        $(document).ready(function(){
+            $("#submit").on("click",function(){
+                var text = $("#textToShow").val()
+                var template = `https://og.darcylf.me/image/?text=${text}`
+                var encodedURL = encodeURI(template)
+                $("#url>a").html(encodedURL)
+                $("#url>a").attr("href",encodedURL)
+                $("#url>img").attr("src",encodedURL)
+            })
+        })
+    </script>
+</body>
+</html>
