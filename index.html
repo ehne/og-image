@@ -29,7 +29,7 @@
         $(document).ready(function(){
             $("#submit").on("click",function(){
                 var text = $("#textToShow").val()
-                var template = `https://og.darcylf.me/image/?text=${text}`
+                var template = `https://og.darcylf.me/image.js?text=${text}`
                 var encodedURL = encodeURI(template)
                 $("#url>a").html(encodedURL)
                 $("#url>a").attr("href",encodedURL)

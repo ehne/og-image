@@ -31,6 +31,7 @@ module.exports = async (req, res) => {
       .toBuffer()
     
     const inputUse = text!=null? card :  __dirname +'/on-dark-hover.svg'
+    const imgGrav = text!=null? "northwest" : "center"
       padder = await sharp({
         create: {
             width: 2048,
@@ -39,7 +40,7 @@ module.exports = async (req, res) => {
             background: "#000"
         }
     })   
-    .composite([{input: inputUse,top:0,left:0}])
+    .composite([{input: inputUse,gravity:imgGrav}])
     .png()
     .toBuffer()    
     
