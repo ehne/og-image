@@ -5,6 +5,7 @@
     "builds": [
         { "src": "*.js", "use": "@now/node" },
         {"src":"fonts/*.*", "use":"@now/static"},
+        {"src":"cf.svg","use":"@now/static"},
         {"src":"on-dark-hover.svg","use":"@now/static"},
         {"src":"*.html","use":"@now/static"}
     ]

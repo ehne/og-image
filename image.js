@@ -8,36 +8,56 @@ const textToSVG = TextToSVG.loadSync(__dirname +"/fonts/bold.otf");
 
 module.exports = async (req, res) => {
     console.log("inside the export")
-    const text = query(req).text
+    const text = query(req).text;
     res.setHeader('Content-Type', 'image/png')
     let padder 
     console.log("set headers")
-    const attributes = {fill: '#ffc53f'};
+
+    // themes
+    const themes = {
+      darcylf: {
+        textColor: '#ffc53f',
+        bgColor: '#000',
+        imgUrl: __dirname + '/on-dark-hover.svg',
+        paddingX: 0,
+        paddingY: 140
+      },
+      cf: {
+        textColor: '#000',
+        bgColor: '#fff',
+        imgUrl:  __dirname +  '/cf.svg',
+        paddingX: 70,
+        paddingY: 70
+      }
+    }
+    const selectedTheme = themes[query(req).theme] || themes["darcylf"];
+    console.log(selectedTheme);
+    const attributes = {fill: selectedTheme.textColor};
     const options = {x: 0, y: 0, fontSize: 140, anchor: 'top', attributes: attributes};
 
     const svg = textToSVG.getSVG(text||"", options);
-    console.log("generated text svg")
+    console.log("generated text svg", __dirname)
     
     const card = await sharp({
         create: {
-          width: 2048,
-          height: 1100,
+          width: 2048-selectedTheme.paddingX,
+          height: 1100-selectedTheme.paddingY,
           channels: 4,
-          background: "#000"
+          background: selectedTheme.bgColor
         }
       })
-      .composite([{ input: __dirname +'/on-dark-hover.svg', gravity: 'southeast'},{input:Buffer(svg)}])
+      .composite([{ input: selectedTheme.imgUrl, gravity:'southeast'},{input: Buffer.from(svg)}])
       .png()
       .toBuffer()
     
-    const inputUse = text!=null? card :  __dirname +'/on-dark-hover.svg'
-    const imgGrav = text!=null? "northwest" : "center"
+    const inputUse = text!=null? card :  selectedTheme.imgUrl;
+    const imgGrav = "center"
       padder = await sharp({
         create: {
             width: 2048,
-            height: 1170,
+            height: 1100,
             channels: 4,
-            background: "#000"
+            background: selectedTheme.bgColor
         }
     })   
     .composite([{input: inputUse,gravity:imgGrav}])
