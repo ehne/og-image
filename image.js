@@ -19,6 +19,7 @@ module.exports = async (req, res) => {
         textColor: '#ffc53f',
         bgColor: '#000',
         imgUrl: __dirname + '/on-dark-hover.svg',
+        imgGrav: 'southeast',
         paddingX: 0,
         paddingY: 140
       },
@@ -26,8 +27,17 @@ module.exports = async (req, res) => {
         textColor: '#000',
         bgColor: '#fff',
         imgUrl:  __dirname +  '/cf.svg',
+        imgGrav: 'southeast',
         paddingX: 70,
         paddingY: 70
+      },
+      head: {
+        textColor: '#000',
+        bgColor: '#FAF9F8',//'#FFF9ED',
+        imgUrl: __dirname + '/head2.svg',
+        imgGrav: 'southwest',
+        paddingY: 70,
+        paddingX: 70
       }
     }
     const selectedTheme = themes[query(req).theme] || themes["darcylf"];
@@ -46,13 +56,14 @@ module.exports = async (req, res) => {
           background: selectedTheme.bgColor
         }
       })
-      .composite([{ input: selectedTheme.imgUrl, gravity:'southeast'},{input: Buffer.from(svg)}])
+      .composite([{ input: selectedTheme.imgUrl, gravity:selectedTheme.imgGrav},{input: Buffer.from(svg)}])
       .png()
       .toBuffer()
     
-    const inputUse = text!=null? card :  selectedTheme.imgUrl;
+    const inputUse = text ? card : selectedTheme.imgUrl;
     const imgGrav = "center"
-      padder = await sharp({
+    
+    padder = await sharp({
         create: {
             width: 2048,
             height: 1100,

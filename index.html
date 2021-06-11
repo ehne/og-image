@@ -7,16 +7,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 	<!--<link rel="stylesheet" href="https://magicfalk.com/awsm.css">-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tablesaw/3.1.2/tablesaw.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tablesaw/3.1.2/tablesaw.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@codolog/form@1.0.0/dist/form.css">
 </head>
 <body>
     <div class="p-8">
-        
-            <input type="text" name="textToShow" id="textToShow" class="form">
-            <button id="submit" class="form">go</button>
-        
+        <form>
+            <label class="form" for="text">Text:</label>
+            <input type="text" name="text" id="textToShow" class="form">
+
+            <label class="form" for="theme">Select theme</label>
+            <select class="form" id="cardStyle" name="theme">
+                <option>darcylf</option>
+                <option>cf</option>
+                <option>head</option>
+            </select>
+        </form>
+            <button id="submit" class="form">go</button> 
         <div id="url">
             <a href=""></a>
             <img src="" alt="">
@@ -31,8 +37,8 @@
     <script>
         $(document).ready(function(){
             $("#submit").on("click",function(){
-                var text = $("#textToShow").val()
-                var template = `https://og.darcylf.me/image.js?text=${text}`
+                
+                var template = `https://og.darcylf.me/image.js?${$( "form" ).serialize()}`
                 var encodedURL = encodeURI(template)
                 $("#url>a").html(encodedURL)
                 $("#url>a").attr("href",encodedURL)
