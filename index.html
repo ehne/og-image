@@ -39,10 +39,10 @@
             $("#submit").on("click",function(){
                 
                 var template = `https://og.darcylf.me/image.js?${$( "form" ).serialize()}`
-                var encodedURL = encodeURI(template)
-                $("#url>a").html(encodedURL)
-                $("#url>a").attr("href",encodedURL)
-                $("#url>img").attr("src",encodedURL)
+               
+                $("#url>a").html(template)
+                $("#url>a").attr("href",template)
+                $("#url>img").attr("src",template)
             })
         })
     </script>
